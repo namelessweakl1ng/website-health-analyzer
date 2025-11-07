@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🧾 Health Report</h1>
+    <p><strong>Website:</strong> {{ url }}</p>
+
+    {% if results.is_online %}
+      <table>
+        <tr><th>Status Code</th><td>{{ results.status_code }}</td></tr>
+        <tr><th>Response Time (ms)</th><td>{{ results.response_time_ms }}</td></tr>
+        <tr><th>Page Size (KB)</th><td>{{ results.page_size_kb }}</td></tr>
+        <tr><th>SSL Valid</th><td>{{ results.ssl_valid }}</td></tr>
+        <tr><th>SSL Expires (days)</th><td>{{ results.ssl_expires_in_days }}</td></tr>
+        <tr><th>Page Title</th><td>{{ results.page_title }}</td></tr>
+        <tr><th>Meta Description</th><td>{{ results.meta_description }}</td></tr>
+      </table>
+    {% else %}
+      <p class="error">❌ Site appears to be offline or unreachable.</p>
+      <p><em>{{ results.error }}</em></p>
+    {% endif %}
+
+    <a href="/">🔙 Check another site</a>
+  </div>
+</body>
+</html>
